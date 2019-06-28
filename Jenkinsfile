@@ -1,24 +1,11 @@
 pipeline {
-    agent any
-    environment {
-        DEPLOY_TO = 'production'
+    agent {
+        docker { image 'node:7-alpine' }
     }
     stages {
-        stage('Example Build') {
+        stage('Test') {
             steps {
-                echo 'Hello World'
-            }
-        }
-
-        stage('environment to test When') {
-            when {
-                allOf {
-                    //branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'production'
-                }
-            }
-            steps {
-                echo 'Deploying'
+                sh 'node --version'
             }
         }
     }
